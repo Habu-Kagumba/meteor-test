@@ -1,0 +1,152 @@
+<head>
+  <title>Meteor app</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+  <link rel="stylesheets" href="style.css" type="text/css">
+</head>
+
+<body>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-10 col-xs-offset-1 col-sm-8 col-sm-offset-2">
+        <div class="row">
+          <div class="page-header text-center">
+            <h1>Meteor App</h1>
+            <p>Form based app for hospitals</p>
+            <div class="row">
+              <span class="col-xs-6">
+                <button type="button" class="btn btn-info btn-lg btn-block patients-btn" id="patients"><i class="fa fa-heartbeat"></i> Patient</button>
+              </span>
+              <span class="col-xs-6">
+                <button type="button" class="btn btn-danger btn-lg btn-block doctors-btn" id="doctors"><i class="fa fa-user-md"></i> Doctor</button>
+              </span>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          {{> Template.dynamic template=active }}
+          <div class="container-fluid" style="height:50px"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="footer">
+    <div class="container">
+      <p class="text-muted text-right">App footer - 2015.</p>
+    </div>
+  </footer>
+</body>
+
+<template name="patients">
+  <div class="patients-div">
+    <h3>Patients details</h3>
+    <form>
+      <div class="form-group">
+        <label for="fullname">Full Name*</label>
+        <input type="text" name="fullname" class="form-control" id="fullname" placeholder="Enter your full name">
+      </div>
+      <div class="form-group">
+        <label for="dob">Date of Birth*</label>
+        <input type="date" class="form-control" id="dob" name='dob'>
+      </div>
+      <div class="form-group">
+        <label for="gender">Gender*</label>
+        <select id="gender" class="form-control input-md" name="gender">
+          <option value="male">Male</option>
+          <option value="female">Female</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label for="nationality">Nationality</label>
+        <input type="text" class="form-control" id="nationality" name='nationality' placeholder="Nationality">
+      </div>
+      <div class="form-group">
+        <label for="idn">ID Number</label>
+        <input type="number" class="form-control" id="idn" name='idn' placeholder="ID number">
+      </div>
+      <div class="form-group">
+        <label for="ration">Ration card number</label>
+        <input type="text" class="form-control" id="ration" name='ration' placeholder='Ration card number'>
+      </div>
+      <div class="form-group">
+        <label for="allergies">Allergies</label>
+        <input type="text" class="form-control" id="allergies" name='allergies' placeholder='Allergies'>
+      </div>
+      <button type="submit" class="btn btn-primary btn-block">Submit</button>
+    </form>
+  </div>
+</template>
+
+<template name="doctors">
+  <div class="doctors-div">
+    <h3>Doctor's area</h3>
+    {{> inputAutocomplete settings=settings id="patientz" class="form-control input-md" placeholder="Enter patient name here"}}
+    <br>
+    <table>
+      <tr>
+        <td>
+          <strong>Name</strong>
+        </td>
+        <td>{{doc.name}}</td>
+      </tr>
+      <tr>
+        <td><strong>Gender</strong></td>
+        <td>{{doc.gender}}</td>
+      </tr>
+      <tr>
+        <td><strong>Date of birth</strong></td>
+        <td>{{doc.dob}}</td>
+      </tr>
+      <tr>
+        <td><strong>Nationality</strong></td>
+        <td>{{doc.nationality}}</td>
+      </tr>
+      <tr>
+        <td><strong>ID Number</strong></td>
+        <td>{{doc.id}}</td>
+      </tr>
+      <tr>
+        <td><strong>Ration card number</strong></td>
+        <td>{{doc.ration}}</td>
+      </tr>
+      <tr>
+        <td><strong>Allergies</strong></td>
+        <td>{{doc.allergies}}</td>
+      </tr>
+    </table>
+  </div>
+  <br>
+  <br>
+  <form>
+    <div class="form-group">
+      <label for="diags">Diagnosis</label>
+      <select  name="diags" class="form-control input-md" id="diags">
+        {{#each diags}}
+          <option value='{{diag}}'>{{diag}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="drugs">Prescribed drugs</label>
+      <select id="drugs" class="form-control input-md" name="drugs">
+        {{#each drugs}}
+          <option value='{{drug}}'>{{drug}}</option>
+        {{/each}}
+      </select>
+    </div>
+    <div class="form-group">
+      <label for="notes">Notes</label>
+      <textarea name="notes" class="form-control" id="notes" placeholder="Enter any supplementary notes here"></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary btn-block">Finish</button>
+  </form>
+</template>
+
+<template name="userPill">
+  <span class='list-group'>{{name}}</span>
+</template>
+
+<template name="success">
+  <div class="alert alert-success" role="alert">
+    Success!!!!
+  </div>
+</template>
